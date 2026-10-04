@@ -9,6 +9,7 @@
 <body>
   <?php
   require '../../repositories/book-repository.php';
+  $book = getBook();
   ?>
   <?php
 $pageTitle = 'Detail Buku';
