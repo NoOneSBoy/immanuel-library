@@ -23,7 +23,7 @@ $pageSubtitle = 'Lengkapi data buku, kategori, dan penulis';
     <?php require_once __DIR__ . '/../../components/admin/topbar.php'; ?>
 
       <div class="app-content">
-        <form method="" action="">
+        <form method="post" action="../../actions/books/store.php">
           <div class="form-card" style="margin-bottom:20px;">
             <div class="form-section-title">Data Buku</div>
             <div class="form-group">
