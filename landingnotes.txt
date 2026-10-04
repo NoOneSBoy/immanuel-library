@@ -1,0 +1,2 @@
+Keuntungan component: tidak menulis ulang kode yang sama, perubahan cukup di satu file, tampilan konsisten, index.php lebih pendek dan mudah dibaca.
+Masalah yang sama di halaman admin: markup sidebar dan topbar disalin identik di 14 file (dan data array juga ditulis ulang di tiap halaman), jadi mengubah satu menu berarti mengubah 14 file.
