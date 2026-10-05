@@ -10,11 +10,8 @@
 
 <body>
   <?php
-  $author = [
-    "id" => 1,
-    "name" => "Andrea Hirata",
-    "bio" => "Penulis asal Belitung, dikenal lewat novel Laskar Pelangi.",
-  ];
+  require_once __DIR__ . '/../../repositories/author-repository.php';
+  $author = getAuthor();
   ?>
   <?php
 $pageTitle = 'Edit Penulis';
