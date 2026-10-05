@@ -24,7 +24,7 @@ $pageSubtitle = 'Perbarui data penulis';
       <?php require_once __DIR__ . '/../../components/admin/topbar.php'; ?>
 
       <div class="app-content">
-        <form method="" action="">
+        <form method="post" action="../../actions/authors/update.php">
           <input type="hidden" name="id" value="<?= $author['id'] ?>">
           <div class="form-card">
             <div class="form-section-title">Data Penulis</div>
