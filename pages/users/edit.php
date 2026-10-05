@@ -8,12 +8,8 @@
 </head>
 <body>
   <?php
-  $user = [
-      "id"    => 2,
-      "name"  => "Budi Santoso",
-      "email" => "budi.santoso@siswa.ski.sch.id",
-      "role"  => "member",
-  ];
+  require_once __DIR__ . '/../../repositories/user-repository.php';
+  $user = getUser();
   ?>
   <?php
 $pageTitle = 'Edit Pengguna';

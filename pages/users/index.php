@@ -8,7 +8,8 @@
 </head>
 <body>
   <?php
-  $user = ["id" => 2, "name" => "Budi Santoso", "email" => "budi.santoso@siswa.ski.sch.id", "role" => "member"];
+  require_once __DIR__ . '/../../repositories/user-repository.php';
+  $users = getUsers();
   ?>
   <div class="app-shell">
   <?php require_once __DIR__ . '/../../components/admin/sidebar.php'; ?>
