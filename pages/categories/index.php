@@ -7,9 +7,10 @@
   <link rel="stylesheet" href="../../styles/categories/index.css">
 </head>
 <body>
-  <?php
-  $category = ["id" => 1, "name" => "Fiksi", "description" => "Novel dan cerita rekaan", "total_books" => 3];
-  ?>
+<?php
+require_once __DIR__ . '/../../repositories/category-repository.php';
+$categories = getCategories();
+?>
   <?php
 $pageTitle = 'Manajemen Kategori';
 $pageSubtitle = 'Kelola kategori untuk mengelompokkan buku';
@@ -43,6 +44,7 @@ $pageSubtitle = 'Kelola kategori untuk mengelompokkan buku';
               </tr>
             </thead>
             <tbody>
+              <?php foreach ($categories as $category): ?>
               <tr>
                 <td>
                   <div class="cell-primary">
@@ -59,6 +61,7 @@ $pageSubtitle = 'Kelola kategori untuk mengelompokkan buku';
                   </div>
                 </td>
               </tr>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>

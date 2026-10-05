@@ -8,13 +8,8 @@
 </head>
 <body>
   <?php
-  $category = [
-      "id"          => 1,
-      "name"        => "Fiksi",
-      "description" => "Novel dan cerita rekaan",
-  ];
-  ?>
-  <?php
+  require_once __DIR__ . '/../../repositories/category-repository.php';
+$category = getCategory();
 $pageTitle = 'Edit Kategori';
 $pageSubtitle = 'Perbarui data kategori';
 ?>
