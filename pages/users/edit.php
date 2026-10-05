@@ -22,7 +22,7 @@ $pageSubtitle = 'Perbarui data dan role pengguna';
     <?php require_once __DIR__ . '/../../components/admin/topbar.php'; ?>
 
       <div class="app-content">
-        <form method="" action="">
+        <form method="post" action="../../actions/users/update.php">
           <input type="hidden" name="id" value="<?= $user['id'] ?>">
           <div class="form-card">
             <div class="form-section-title">Data Pengguna</div>
