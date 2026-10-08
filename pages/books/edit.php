@@ -1,3 +1,25 @@
+<?php
+
+require_once __DIR__ . '/../../repositories/book-repository.php';
+require_once __DIR__ . '/../../repositories/category-repository.php';
+require_once __DIR__ . '/../../repositories/author-repository.php';
+
+$id = $_GET['id'] ?? 1;
+
+$book = getBook($id);
+$categories = getCategories();
+$authors = getAuthors();
+
+if ($book === null) {
+    echo 'Buku tidak ditemukan.';
+    exit;
+}
+
+$pageTitle = 'Edit Buku';
+$pageSubtitle = 'Perbarui data buku, kategori, dan penulis';
+
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -9,21 +31,6 @@
 </head>
 
 <body>
-
-  <?php
-  require_once __DIR__ . '/../../repositories/book-repository.php';
-  require_once __DIR__ . '/../../repositories/category-repository.php';
-  require_once __DIR__ . '/../../repositories/author-repository.php';
-
-  $book = getBook();
-  $categories = getCategories();
-  $authors = getAuthors();
-  ?>
-
-  <?php
-  $pageTitle = 'Edit Buku';
-  $pageSubtitle = 'Perbarui data buku, kategori, dan penulis';
-  ?>
 
   <div class="app-shell">
 
@@ -37,7 +44,7 @@
 
         <form method="post" action="../../actions/books/update.php">
 
-          <input type="hidden" name="id" value="<?= $book['id'] ?>">
+          <input type="hidden" name="id" value="<?= htmlspecialchars($book['id']) ?>">
 
           <div class="form-card" style="margin-bottom:20px;">
 
@@ -45,11 +52,12 @@
 
             <div class="form-group">
               <label for="title">Judul Buku</label>
+
               <input
                 type="text"
                 id="title"
                 name="title"
-                value="<?= $book['title'] ?>"
+                value="<?= htmlspecialchars($book['title']) ?>"
               >
             </div>
 
@@ -57,21 +65,23 @@
 
               <div class="form-group">
                 <label for="isbn">ISBN</label>
+
                 <input
                   type="text"
                   id="isbn"
                   name="isbn"
-                  value="<?= $book['isbn'] ?>"
+                  value="<?= htmlspecialchars($book['isbn']) ?>"
                 >
               </div>
 
               <div class="form-group">
                 <label for="year">Tahun Terbit</label>
+
                 <input
                   type="number"
                   id="year"
                   name="year"
-                  value="<?= $book['year'] ?>"
+                  value="<?= htmlspecialchars($book['year']) ?>"
                 >
               </div>
 
@@ -81,11 +91,12 @@
 
               <div class="form-group">
                 <label for="stock">Jumlah Stok</label>
+
                 <input
                   type="number"
                   id="stock"
                   name="stock"
-                  value="<?= $book['stock'] ?>"
+                  value="<?= htmlspecialchars($book['stock']) ?>"
                 >
               </div>
 
@@ -98,9 +109,9 @@
 
                     <option
                       value="<?= $category['id'] ?>"
-                      <?= $category['id'] === $book['category_id'] ? 'selected' : '' ?>
+                      <?= (int) $category['id'] === (int) $book['category_id'] ? 'selected' : '' ?>
                     >
-                      <?= $category['name'] ?>
+                      <?= htmlspecialchars($category['name']) ?>
                     </option>
 
                   <?php endforeach; ?>
@@ -112,13 +123,14 @@
             </div>
 
             <div class="form-group">
+
               <label for="description">Deskripsi</label>
 
               <textarea
                 id="description"
                 name="description"
                 rows="3"
-              ><?= $book['description'] ?></textarea>
+              ><?= htmlspecialchars($book['description']) ?></textarea>
 
             </div>
 
@@ -145,7 +157,7 @@
                       <?= in_array($author['id'], $book['author_ids']) ? 'checked' : '' ?>
                     >
 
-                    <?= $author['name'] ?>
+                    <?= htmlspecialchars($author['name']) ?>
 
                   </label>
 
