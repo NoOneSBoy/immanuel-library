@@ -1,7 +1,14 @@
 <?php
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    echo "Data buku dengan id {$id} berhasil dihapus (simulasi, belum ada database).";
+
+    echo "<h2>Data buku berhasil dihapus (simulasi)</h2>";
+
+    echo '<pre>';
+    echo "ID Buku: ";
+    print_r($id);
+    echo '</pre>';
 } else {
     echo 'ID data tidak ditemukan.';
 }
