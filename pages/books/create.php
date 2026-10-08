@@ -1,88 +1,148 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tambah Buku - Perpustakaan Digital</title>
-  <link rel="stylesheet" href="../../styles/books/create.css">
-</head>
-<body>
-  <?php
-  require_once __DIR__ . '/../../repositories/category-repository.php';
-  require_once __DIR__ . '/../../repositories/author-repository.php';
-  $categories = getCategories();
-  $authors = getAuthors();
-  ?>
-  <?php
+<?php
+
+require_once '../../repositories/book-repository.php';
+require_once '../../repositories/category-repository.php';
+require_once '../../repositories/author-repository.php';
+
+$categories = getCategories();
+$authors = getAuthors();
+
 $pageTitle = 'Tambah Buku';
-$pageSubtitle = 'Lengkapi data buku, kategori, dan penulis';
+$pageSubtitle = 'Tambahkan buku baru ke dalam koleksi perpustakaan';
+
+require_once '../../components/admin/topbar.php';
+require_once '../../components/admin/sidebar.php';
 ?>
-  <div class="app-shell">
-  <?php require_once __DIR__ . '/../../components/admin/sidebar.php'; ?>
 
-    <main class="app-main">
-    <?php require_once __DIR__ . '/../../components/admin/topbar.php'; ?>
+<main class="app-main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Form Tambah Buku</h3>
+                    </div>
 
-      <div class="app-content">
-        <form method="post" action="../../actions/books/store.php">
-          <div class="form-card" style="margin-bottom:20px;">
-            <div class="form-section-title">Data Buku</div>
-            <div class="form-group">
-              <label for="title">Judul Buku</label>
-              <input type="text" id="title" name="title" placeholder="Contoh: Laskar Pelangi">
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="isbn">ISBN</label>
-                <input type="text" id="isbn" name="isbn" placeholder="Contoh: 978-979-1227-78-0">
-              </div>
-              <div class="form-group">
-                <label for="year">Tahun Terbit</label>
-                <input type="number" id="year" name="year" placeholder="Contoh: 2005">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="stock">Jumlah Stok</label>
-                <input type="number" id="stock" name="stock" placeholder="Contoh: 10">
-              </div>
-              <div class="form-group">
-                <label for="category_id">Kategori</label>
-                <select id="category_id" name="category_id">
-  <?php foreach ($categories as $category): ?>
-    <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
-  <?php endforeach; ?>
-</select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="description">Deskripsi</label>
-              <textarea id="description" name="description" rows="3" placeholder="Sinopsis singkat buku"></textarea>
-            </div>
-          </div>
+                    <form action="../../actions/books/store.php" method="POST">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Judul Buku</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="title"
+                                    name="title"
+                                    required
+                                >
+                            </div>
 
-          <div class="form-card">
-            <div class="form-section-title">Penulis Buku</div>
-            <div class="form-group">
-              <label>Pilih Penulis (bisa lebih dari satu)</label>
-              <div class="checkbox-grid">
-                <?php foreach ($authors as $author): ?>
-  <label class="checkbox-item">
-    <input type="checkbox" name="author_ids[]" value="<?= $author['id'] ?>">
-    <?= $author['name'] ?>
-  </label>
-<?php endforeach; ?>
-              </div>
-            </div>
+                            <div class="mb-3">
+                                <label for="isbn" class="form-label">ISBN</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="isbn"
+                                    name="isbn"
+                                    required
+                                >
+                            </div>
 
-            <div class="form-actions">
-              <a href="index.php" class="btn btn-outline">Batal</a>
-              <button type="submit" class="btn btn-primary">Simpan Buku</button>
+                            <div class="mb-3">
+                                <label for="year" class="form-label">Tahun Terbit</label>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="year"
+                                    name="year"
+                                    required
+                                >
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="stock" class="form-label">Stok</label>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="stock"
+                                    name="stock"
+                                    required
+                                >
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="category_id" class="form-label">Kategori</label>
+                                <select
+                                    class="form-select"
+                                    id="category_id"
+                                    name="category_id"
+                                    required
+                                >
+                                    <option value="">Pilih Kategori</option>
+
+                                    <?php foreach ($categories as $category): ?>
+                                        <option value="<?= $category['id']; ?>">
+                                            <?= htmlspecialchars($category['name']); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Penulis</label>
+
+                                <?php foreach ($authors as $author): ?>
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            name="author_ids[]"
+                                            value="<?= $author['id']; ?>"
+                                            id="author_<?= $author['id']; ?>"
+                                        >
+
+                                        <label
+                                            class="form-check-label"
+                                            for="author_<?= $author['id']; ?>"
+                                        >
+                                            <?= htmlspecialchars($author['name']); ?>
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Deskripsi</label>
+                                <textarea
+                                    class="form-control"
+                                    id="description"
+                                    name="description"
+                                    rows="5"
+                                    required
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button
+                                type="submit"
+                                name="store"
+                                class="btn btn-primary"
+                            >
+                                Simpan Buku
+                            </button>
+
+                            <a
+                                href="index.php"
+                                class="btn btn-secondary"
+                            >
+                                Batal
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </div>
-        </form>
-      </div>
-    </main>
-  </div>
-</body>
-</html>
+        </div>
+    </div>
+</main>
+
+<?php require_once '../../components/admin/footer.php'; ?>
