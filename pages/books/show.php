@@ -9,7 +9,25 @@
 <body>
   <?php
   require '../../repositories/book-repository.php';
-  $book = getBook();
+  $book = getBook([
+    'title' => $book['title'],
+    'isbn' => $book['isbn'],
+    'year' => $book['year'],
+    'category' => $book['category'],
+    'authors' => $book['authors'],
+    'stock' => $book['stock'],
+    'description' => $book['description']
+  ]);
+  ?>
+  <?php
+$pageTitle = 'Detail Buku';
+$pageSubtitle = 'Informasi lengkap buku beserta kategori dan penulis';
+?>
+  <div class="app-shell">
+  <?php require_once __DIR__ . '/../../components/admin/sidebar.php'; ?>
+
+    <main class="app-main">
+  ];
   ?>
   <?php
 $pageTitle = 'Detail Buku';
@@ -36,8 +54,8 @@ $pageSubtitle = 'Informasi lengkap buku beserta kategori dan penulis';
               <div class="detail-label">Penulis</div>
               <div class="detail-value">
                 <div class="chip-list">
-                  <?php foreach ($book['authors'] as $authorName): ?>
-                    <span class="chip"><?= $authorName ?></span>
+                  <?php foreach ($book['authors'] as $author): ?>
+                    <span class="chip"><?= $author ?></span>
                   <?php endforeach; ?>
                 </div>
               </div>
