@@ -1,7 +1,17 @@
 <?php
-if (isset($_GET['id'])) {
+
+if (
+    $_SERVER['REQUEST_METHOD'] === 'GET' &&
+    isset($_GET['id'])
+) {
     $id = $_GET['id'];
-    echo "Data penulis dengan id {$id} berhasil dihapus (simulasi, belum ada database).";
+
+    echo '<h2>Data penulis berhasil dihapus (simulasi)</h2>';
+
+    echo '<pre>';
+    echo 'ID Penulis: ';
+    print_r($id);
+    echo '</pre>';
 } else {
     echo 'ID data tidak ditemukan.';
 }
