@@ -45,21 +45,19 @@ $books = [
 return $books;
 }
 
-function getBook() {
-  $book = [
-   
+function getBook($book) {
 $book = [
-  "id" => 5,
-  "title" => "Antologi Rasa Nusantara",
-  "isbn" => "978-602-1234-56-7",
-  "year" => 2021,
-  "stock" => 4,
-  "category" => "Fiksi",
-  "description" => "Kumpulan puisi dan cerita pendek dari berbagai penulis Nusantara.",
-  "authors" => ["Pramoedya Ananta Toer", "Sapardi Djoko Damono"],
-    "category_id" => 1,
-    "author_ids" => [4, 5],
-]
-  ];
-  return $book;
+    'id' => $book['id'],
+    'title' => $book['title'],
+    'isbn' => $book['isbn'],
+    'year' => $book['year'],
+    'stock' => $book['stock'],
+    'category' => $book['category'],
+    'description' => $book['description'],
+    'authors' => $book['authors'],
+    'category_id' => $book['category_id'],
+    'author_ids' => $book['author_ids']
+];
+
+ return $book;
 }
