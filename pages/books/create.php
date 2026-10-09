@@ -144,5 +144,3 @@ require_once '../../components/admin/sidebar.php';
         </div>
     </div>
 </main>
-
-<?php require_once '../../components/admin/footer.php'; ?>
