@@ -1,10 +1,11 @@
+
 <aside class="sidebar">
     <div class="sidebar-header">
         <h2>Immanuel Library</h2>
     </div>
 
     <nav class="sidebar-nav">
-        <a href="../../pages/dashboard/index.php">
+        <a href="../../index.php">
             Dashboard
         </a>
 
