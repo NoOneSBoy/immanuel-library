@@ -1,14 +1,23 @@
+<?php
+$title = "Beranda - Immanuel Library";
+
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beranda - Perpustakaan Digital</title>
+  <title>
+    <?= $title ?>
+  </title>
   <link rel="stylesheet" href="styles/index.css">
 </head>
-<?php require_once __DIR__ . '/components/landing/header.php'; ?>
+
 <body>
+  <?php require_once __DIR__ . "/components/landing/header.php" ?>
+
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="hero-text">
@@ -94,7 +103,7 @@
       </div>
     </div>
   </section>
-  <?php require_once __DIR__ . '/components/landing/footer.php'; ?>
+  <?php require_once __DIR__ . "/components/landing/footer.php" ?>
 </body>
 
 </html>

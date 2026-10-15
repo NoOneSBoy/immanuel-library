@@ -1,20 +1,11 @@
 <?php
+if (isset($_POST['update']) && $_SERVER['REQUEST_METHOD'] === "POST") {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $role = $_POST['role'];
 
-if (
-    $_SERVER['REQUEST_METHOD'] === 'POST' &&
-    isset(
-        $_POST['update'],
-        $_POST['id'],
-        $_POST['name'],
-        $_POST['email'],
-        $_POST['role']
-    )
-) {
-    echo '<h2>Data pengguna berhasil diubah (simulasi)</h2>';
-
-    echo '<pre>';
     print_r($_POST);
-    echo '</pre>';
-} else {
-    echo 'Data tidak lengkap atau halaman dibuka tanpa mengirim form.';
 }
+
+?>

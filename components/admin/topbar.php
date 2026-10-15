@@ -1,11 +1,13 @@
-<header class="topbar">
-    <div class="topbar-content">
-        <div>
-            <h1><?= htmlspecialchars($pageTitle ?? '') ?></h1>
-
-            <?php if (!empty($pageSubtitle)): ?>
-                <p><?= htmlspecialchars($pageSubtitle) ?></p>
-            <?php endif; ?>
-        </div>
+<header class="app-topbar">
+  <div class="page-title">
+    <h1><?= $pageTitle ?></h1>
+    <p><?= $pageSubtitle ?></p>
+  </div>
+  <div class="topbar-user">
+    <span class="avatar">BS</span>
+    <div>
+      Budi Santoso<br>
+      <span class="badge badge-member" style="margin-top:2px;">Member</span>
     </div>
+  </div>
 </header>
