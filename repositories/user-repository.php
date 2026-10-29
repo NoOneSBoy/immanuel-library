@@ -1,15 +1,11 @@
 <?php
-
+require_once __DIR__ . "/../config/database.php";
 function getUsers()
 {
-  $users = [
-    ["id" => 1, "name" => "Admin Utama",    "email" => "admin@ski.sch.id",               "role" => "admin"],
-    ["id" => 2, "name" => "Budi Santoso",   "email" => "budi.santoso@siswa.ski.sch.id",  "role" => "member"],
-    ["id" => 3, "name" => "Siti Aminah",    "email" => "siti.aminah@siswa.ski.sch.id",   "role" => "member"],
-    ["id" => 4, "name" => "Richard Marcell","email" => "richard.m@ski.sch.id",           "role" => "admin"],
-  ];
+  require_once __DIR__ . "/../config/database.php";
 
-  return $users;
+  $stmt = $pdo->query("SELECT id, name, email, role FROM users ORDER BY id");
+  return $stmt->fetchAll();
 }
 
 function getUser()
@@ -34,4 +30,35 @@ function getProfile()
   ];
 
   return $profile;
+}
+
+function isEmailTaken($email)
+{
+  global $pdo;
+
+  $query = "SELECT COUNT(id) FROM users WHERE email = :email";
+
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([
+    'email' => $email
+  ]);
+
+  $isEmailTaken = $stmt->fetchColumn() > 0;
+  return $isEmailTaken;
+
+}
+
+function findUserByEmail($email)
+{
+  global $pdo;
+
+  $query = "SELECT * FROM users WHERE email = :email";
+
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([
+    'email' => $email
+  ]);
+
+  $user = $stmt->fetch();
+  return $user;
 }

@@ -1,25 +1,15 @@
-CATATAN REFLEKSI - LANDING PAGE IMMANUEL LIBRARY
+1. Apa keuntungan memisahkan header dan footer menjadi file component tersendiri, dibandingkan menuliskannya langsung berulang-ulang di index.php?
 
-1. Apa keuntungan memisahkan header dan footer menjadi file component tersendiri,
-   dibandingkan menuliskannya langsung berulang-ulang di index.php?
+Pemisahan header.php dan footer.php ke dalam folder components/landing/ memberikan efisiensi struktur kode yang signifikan. Alih-alih menulis ulang markup yang sama di setiap halaman, kode tersebut cukup didefinisikan satu kali dan dipanggil menggunakan require_once. Keuntungannya meliputi:
 
-   Dengan memisahkan header dan footer ke components/landing/header.php dan
-   components/landing/footer.php, markup yang sama cukup ditulis satu kali lalu
-   disertakan ke halaman mana pun dengan require_once. Jika ada perubahan, misalnya
-   menambah menu navigasi atau mengganti teks hak cipta, cukup mengubah satu file dan
-   seluruh halaman yang memakainya ikut berubah. Hal ini mengurangi risiko tampilan
-   tidak konsisten karena lupa mengubah salah satu salinan. File index.php juga menjadi
-   lebih pendek dan fokus pada isi halaman (hero, statistik, fitur), sehingga lebih mudah
-   dibaca dan dirawat.
+Kemudahan Pemeliharaan (Maintainability): Saat ada penambahan menu navigasi atau pembaruan teks hak cipta, perubahan cukup dilakukan pada satu file pusat dan otomatis diterapkan ke seluruh halaman.
 
-2. Bagian mana pada halaman-halaman admin (Buku, Kategori, Penulis, Pengguna, Profil)
-   yang mengalami masalah yang sama seperti header/footer sebelum dipisah?
+Konsistensi Tampilan: Meminimalisir risiko inkonsistensi antarhalaman yang sering terjadi akibat ada bagian yang terlewat saat penyuntingan manual.
 
-   Bagian sidebar (elemen <aside> berisi menu Beranda, Buku, Kategori, Penulis, Pengguna,
-   dan Profil Saya) dan topbar (elemen <header> berisi judul halaman serta info pengguna)
-   ditulis ulang secara identik di 14 file halaman admin. Akibatnya, jika satu menu
-   sidebar diubah atau ditambah, kita harus mengedit 14 file satu per satu dan mudah ada
-   yang terlewat. Topbar juga hanya berbeda pada judul dan subjudulnya, sehingga lebih
-   tepat dijadikan satu component yang menerima variabel $pageTitle dan $pageSubtitle.
-   Selain itu, data pada halaman admin masih ditulis sebagai array mentah di tiap file,
-   bukan diambil dari satu sumber (repository function).
+Keterbacaan Kode: Berkas utama (index.php) menjadi lebih bersih, ringkas, dan berfokus penuh pada konten inti (seperti hero section, statistik, dan fitur), sehingga lebih mudah dibaca dan dikelola.
+
+2. Bagian mana pada halaman-halaman admin (Buku, Kategori, Penulis, Pengguna, Profil) yang mengalami masalah yang sama seperti header/footer sebelum dipisah?
+
+Bagian yang mengalami duplikasi serupa adalah komponen navigasi utama, yaitu sidebar (elemen <aside> untuk menu navigasi) dan topbar (elemen <header> untuk judul dan informasi profil). Sebelum dipisah, kedua elemen ini disalin secara identik ke dalam 14 file halaman admin yang berbeda.
+
+Dampaknya, setiap kali ada penambahan atau perubahan menu, proses penyuntingan harus dilakukan satu per satu pada 14 file tersebut, yang sangat rentan terhadap kesalahan (human error). Topbar sendiri sebenarnya memiliki struktur serupa, hanya berbeda pada variabel judul ($pageTitle) dan subjudul ($pageSubtitle), sehingga sangat ideal untuk dijadikan komponen dinamis. Selain itu, pengelolaan data admin pada saat itu masih menggunakan array statis di masing-masing file, belum terpusat melalui fungsi repository.
